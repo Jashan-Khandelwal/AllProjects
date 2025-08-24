@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors Deluxe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: linear-gradient(135deg, #283e51 0%, #485563 100%);
+      --glass-bg: rgba(255,255,255,0.08);
+      --border-clr: rgba(255,255,255,0.25);
+      --card-bg: rgba(34,40,49,0.55);
+      --score-win: #22ff8a;
+      --score-lose: #ff3857;
+      --score-draw: #ffd43b;
+      --icon-shadow: 0 6px 24px 0 #39FF14bb;
+      --button-glow: 0 0 12px #4ef5ffb0;
+      --history-bg: rgba(34,40,49,0.86);
+      --accent: #39FF14;
+      --txt: #fff;
+    }
+    body[data-theme="light"] {
+      --main-bg: linear-gradient(135deg, #c9ffbf 0%, #ffafbd 100%);
+      --glass-bg: rgba(255,255,255,0.35);
+      --border-clr: rgba(34,40,49,0.08);
+      --card-bg: rgba(255,255,255,0.6);
+      --score-win: #0bbd59;
+      --score-lose: #d40032;
+      --score-draw: #ffa600;
+      --icon-shadow: 0 6px 24px 0 #0bbd59bb;
+      --button-glow: 0 0 12px #0099ffb0;
+      --history-bg: rgba(255,255,255,0.93);
+      --accent: #0bbd59;
+      --txt: #222831;
+    }
+    body {
+      min-height: 100vh;
+      background: var(--main-bg);
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      color: var(--txt);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      transition: background 0.6s;
+    }
+    .container {
+      width: 90vw;
+      max-width: 480px;
+      margin-top: 4vh;
+      padding: 2.5em 2em 2em 2em;
+      background: var(--glass-bg);
+      border-radius: 36px;
+      border: 1.5px solid var(--border-clr);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 1.5px 12px var(--accent);
+      backdrop-filter: blur(16px);
+      transition: background 0.7s;
+    }
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.2em;
+      gap: 1em;
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin: 0;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      text-shadow: 0 2px 12px #0004;
+      color: var(--txt);
+    }
+    .toggle-theme {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-clr);
+      border-radius: 12px;
+      padding: 0.45em 1em;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--accent);
+      box-shadow: 0 2px 16px 0 #fff2;
+      transition: background 0.3s, color 0.3s;
+      outline: none;
+    }
+    .toggle-theme:hover {
+      background: var(--accent);
+      color: var(--card-bg);
+      filter: brightness(1.13);
+    }
+    .buttons {
+      display: flex;
+      gap: 1.5em;
+      justify-content: center;
+      margin-bottom: 2.2em;
+      margin-top: 1.5em;
+    }
+    .btn-move {
+      font-size: 2.2rem;
+      padding: 1.2em 1.35em;
+      background: var(--card-bg);
+      color: var(--txt);
+      border: none;
+      border-radius: 20px;
+      box-shadow: var(--button-glow), 0 2px 10px 0 #0002;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      outline: none;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.35s;
+      z-index: 1;
+    }
+    .btn-move:hover, .btn-move:focus {
+      background: var(--accent);
+      color: #111;
+      transform: scale(1.09) translateY(-4px);
+      box-shadow: 0 4px 32px 0 var(--accent), var(--button-glow);
+      filter: brightness(1.11);
+    }
+    .score-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1em;
+      margin-top: 0.5em;
+      gap: 2em;
+    }
+    .score-card {
+      background: var(--card-bg);
+      padding: 1em 2.3em;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 1.4rem;
+      text-align: center;
+      box-shadow: 0 2px 16px 0 #2222;
+      min-width: 120px;
+      transition: background 0.35s;
+      letter-spacing: 0.03em;
+      position: relative;
+    }
+    .score-num {
+      font-size: 2.7rem;
+      font-weight: 600;
+      display: block;
+      margin-top: 0.15em;
+      margin-bottom: 0.04em;
+      transition: color 0.22s, text-shadow 0.2s;
+      filter: drop-shadow(0 2px 16px var(--accent));
+    }
+    .score-card.win .score-num { color: var(--score-win); text-shadow: 0 0 20px var(--score-win); }
+    .score-card.lose .score-num { color: var(--score-lose); text-shadow: 0 0 18px var(--score-lose); }
+    .score-card.draw .score-num { color: var(--score-draw); text-shadow: 0 0 18px var(--score-draw); }
+
+    #result {
+      min-height: 64px;
+      background: var(--card-bg);
+      padding: 1.3em 1.3em 0.7em 1.3em;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      text-align: center;
+      box-shadow: 0 1.5px 10px 0 #0001;
+      margin-bottom: 1.1em;
+      margin-top: 0.5em;
+      letter-spacing: 0.01em;
+      animation: fadein 0.7s;
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+      transition: background 0.35s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .history-section {
+      width: 100%;
+      margin-top: 1em;
+      background: var(--history-bg);
+      border-radius: 16px;
+      padding: 1.2em 1em 1em 1em;
+      box-shadow: 0 2px 16px 0 #2224;
+      font-size: 1rem;
+      min-height: 70px;
+      max-height: 164px;
+      overflow-y: auto;
+      color: var(--txt);
+      transition: background 0.5s;
+    }
+    .history-section h3 {
+      margin: 0 0 0.3em 0.4em;
+      font-size: 1.13em;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .history-log {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--txt);
+    }
+    .history-log li {
+      padding: 0.15em 0.2em;
+      margin-bottom: 0.1em;
+      opacity: 0.98;
+      transition: background 0.24s;
+    }
+    .history-win { color: var(--score-win);}
+    .history-lose { color: var(--score-lose);}
+    .history-draw { color: var(--score-draw);}
+    @media (max-width: 600px) {
+      .container {padding: 1.1em 0.6em 1.3em 0.6em; border-radius: 19px;}
+      .score-card {min-width: 88px; font-size: 1.06rem;}
+      .score-num {font-size: 2.0rem;}
+      .buttons {gap: 0.65em;}
+      .btn-move {padding: 0.68em 0.8em; font-size: 1.36rem;}
+      .history-section {font-size: 0.93em;}
+      h1 {font-size: 1.5rem;}
+    }
+    .confetti-piece {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      border-radius: 60%;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0.86;
+      animation: confetti-fall 1.4s cubic-bezier(0.35,0.45,0.51,1.07) forwards;
+    }
+    @keyframes confetti-fall {
+      0%   {transform: translateY(-40px) scale(1) rotate(0);}
+      60%  {transform: translateY(75vh) scale(1.05) rotate(200deg);}
+      100% {transform: translateY(94vh) scale(1.1) rotate(360deg); opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title-bar">
+      <h1>🕹️ Rock Paper Scissors</h1>
+      <button class="toggle-theme" id="themeBtn">☀️</button>
+    </div>
+    <div class="score-area">
+      <div class="score-card" id="youCard">
+        You
+        <span class="score-num" id="yourScore">0</span>
+      </div>
+      <div class="score-card" id="compCard">
+        Computer
+        <span class="score-num" id="compScore">0</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="btn-move" id="rock" aria-label="Rock">🪨</button>
+      <button class="btn-move" id="paper" aria-label="Paper">📄</button>
+      <button class="btn-move" id="scissors" aria-label="Scissors">✂️</button>
+    </div>
+    <div id="result">Make your move!</div>
+    <div class="history-section">
+      <h3>Game History</h3>
+      <ul class="history-log" id="historyLog"></ul>
+    </div>
+  </div>
+  <!-- Tiny SFX (Base64) -->
+  <audio id="winSnd" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAAAgP//AAAA//8A" preload="auto"></audio>
+  <audio id="loseSnd" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAAAAP8AAP//AAD/" preload="auto"></audio>
+  <audio id="drawSnd" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAAA//8AgP8A//8A" preload="auto"></audio>
+  <script>
+    let hScore = 0, cScore = 0;
+    const result = document.getElementById("result");
+    const yourScore = document.getElementById("yourScore");
+    const compScore = document.getElementById("compScore");
+    const youCard = document.getElementById("youCard");
+    const compCard = document.getElementById("compCard");
+    const historyLog = document.getElementById("historyLog");
+    const winSnd = document.getElementById("winSnd");
+    const loseSnd = document.getElementById("loseSnd");
+    const drawSnd = document.getElementById("drawSnd");
+    const themeBtn = document.getElementById("themeBtn");
+
+    const icons = ["🪨", "📄", "✂️"];
+    const names = ["Rock", "Paper", "Scissors"];
+    let gameHistory = [];
+
+    function playRound(humanChoice) {
+      const computerChoice = Math.floor(Math.random() * 3);
+      let message = "", resultType = "";
+
+      if (humanChoice === computerChoice) {
+        message = `🤝 <b>Draw!</b> You both chose <b>${icons[humanChoice]} ${names[humanChoice]}</b>.`;
+        resultType = "draw";
+        drawSnd.currentTime = 0; drawSnd.play();
+      } else if (
+        (humanChoice === 0 && computerChoice === 2) ||
+        (humanChoice === 1 && computerChoice === 0) ||
+        (humanChoice === 2 && computerChoice === 1)
+      ) {
+        hScore++;
+        message = `✅ <b>You win!</b> <span style="font-size:1.35em">${icons[humanChoice]}</span> beats <span style="font-size:1.25em">${icons[computerChoice]}</span>.`;
+        resultType = "win";
+        winSnd.currentTime = 0; winSnd.play();
+        launchConfetti();
+      } else {
+        cScore++;
+        message = `❌ <b>You lose!</b> <span style="font-size:1.3em">${icons[computerChoice]}</span> beats <span style="font-size:1.2em">${icons[humanChoice]}</span>.`;
+        resultType = "lose";
+        loseSnd.currentTime = 0; loseSnd.play();
+      }
+      updateScores(resultType);
+      result.innerHTML = `<p>${message}</p>
+        <p class="score" style="margin-bottom:-0.6em;opacity:0.82">Your Score: ${hScore} | Computer: ${cScore}</p>
+      `;
+
+      // Game history
+      gameHistory.unshift({
+        type: resultType,
+        h: icons[humanChoice],
+        c: icons[computerChoice],
+        msg: resultType === "win" ? "You!" : resultType === "lose" ? "Comp!" : "Draw"
+      });
+      if (gameHistory.length > 7) gameHistory.pop();
+      renderHistory();
+
+      // Game end
+      if (hScore === 5 || cScore === 5) {
+        setTimeout(() => {
+          alert(
+            hScore > cScore
+              ? `🎉 You win the game!\nFinal Score:\nYou: ${hScore} Computer: ${cScore}`
+              : `😢 You lose the game.\nFinal Score:\nYou: ${hScore} Computer: ${cScore}`
+          );
+          hScore = 0;
+          cScore = 0;
+          updateScores();
+          result.innerText = "Make your move!";
+          gameHistory = [];
+          renderHistory();
+        }, 400);
+      }
+    }
+    function updateScores(state = "") {
+      yourScore.innerText = hScore;
+      compScore.innerText = cScore;
+      youCard.className = "score-card" + (state === "win" ? " win" : state === "lose" ? " lose" : state === "draw" ? " draw" : "");
+      compCard.className = "score-card" + (state === "lose" ? " win" : state === "win" ? " lose" : state === "draw" ? " draw" : "");
+    }
+    function renderHistory() {
+      historyLog.innerHTML = gameHistory.map(
+        g => `<li class="history-${g.type}">🧑 ${g.h} &nbsp;vs&nbsp; 🤖 ${g.c} — <b>${g.msg}</b></li>`
+      ).join('');
+    }
+    // Confetti
+    function launchConfetti() {
+      for (let i = 0; i < 14; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-piece';
+        confetti.style.left = (45 + Math.random()*10) + '%';
+        confetti.style.background = `hsl(${Math.floor(Math.random()*360)},80%,${60+Math.random()*20}%)`;
+        confetti.style.transform = `rotate(${Math.random()*180}deg)`;
+        confetti.style.animationDelay = (Math.random()*0.5) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(()=>confetti.remove(), 1600);
+      }
+    }
+    // Theme
+    function toggleTheme() {
+      const light = document.body.getAttribute('data-theme') === "light";
+      document.body.setAttribute('data-theme', light ? "dark" : "light");
+      themeBtn.textContent = light ? "☀️" : "🌙";
+      localStorage.setItem("rps-theme", light ? "dark" : "light");
+    }
+    themeBtn.onclick = toggleTheme;
+    // Load theme
+    (() => {
+      let theme = localStorage.getItem("rps-theme");
+      if (!theme) theme = "dark";
+      document.body.setAttribute('data-theme', theme);
+      themeBtn.textContent = theme === "light" ? "🌙" : "☀️";
+    })();
+
+    document.getElementById("rock").addEventListener("click", () => playRound(0));
+    document.getElementById("paper").addEventListener("click", () => playRound(1));
+    document.getElementById("scissors").addEventListener("click", () => playRound(2));
+  </script>
+</body>
+</html>

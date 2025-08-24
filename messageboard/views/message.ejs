@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      .message {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      .author {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+      .text {
+        margin-bottom: 0.5rem;
+      }
+      .date {
+        font-size: 0.9rem;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Messages</h1>
+    <ul>
+      <% messages.forEach((message) => { %> <%- include('user', { user: message
+      }) %> <% }); %>
+    </ul>
+
+    <nav>
+      <ul>
+        <% links.forEach(link => { %>
+        <li>
+          <a href="<%= link.href %>"><%= link.text %></a>
+        </li>
+        <% }) %>
+      </ul>
+    </nav>
+  </body>
+</html>

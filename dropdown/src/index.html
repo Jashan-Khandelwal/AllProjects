@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reusable Dropdown Demo</title>
+  </head>
+  <body>
+    <!-- EXAMPLE #1 – trigger by click (default) -->
+    <div class="dropdown" data-trigger="click">
+      <button
+        class="dropdown-toggle"
+        aria-haspopup="menu"
+        aria-expanded="false"
+      >
+        File ▾
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" role="menuitem">New</a></li>
+        <li><a href="#" role="menuitem">Rename</a></li>
+        <li><a href="#" role="menuitem">Delete</a></li>
+      </ul>
+    </div>
+
+    <!-- EXAMPLE #2 – trigger by hover -->
+    <div class="dropdown" data-trigger="hover">
+      <button
+        class="dropdown-toggle"
+        aria-haspopup="menu"
+        aria-expanded="false"
+      >
+        Share ▾
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" role="menuitem">Copy link</a></li>
+        <li><a href="#" role="menuitem">E-mail</a></li>
+        <li><a href="#" role="menuitem">Embed</a></li>
+      </ul>
+    </div>
+    <!-- No <link> or <script> tags here; webpack injects your bundle -->
+  </body>
+</html>

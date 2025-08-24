@@ -1,0 +1,199 @@
+:root {
+  --bg: #0b1020;
+  --panel: #131a2c;
+  --muted: #7c8aa3;
+  --text: #eaf0ff;
+  --accent: #7aa2ff;
+  --accent-2: #35e0b9;
+  --win: #1d653f;
+  --danger: #e94b4b;
+  --ring: 0 0 0 3px rgba(122, 162, 255, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: radial-gradient(
+        1200px 800px at 20% -10%,
+        #122247 0%,
+        rgba(18, 34, 71, 0) 60%
+      )
+      no-repeat,
+    var(--bg);
+  color: var(--text);
+  font: 16px/1.5 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+}
+
+.wrapper {
+  max-width: 760px;
+  margin: clamp(20px, 4vw, 48px) auto;
+  padding: clamp(16px, 3vw, 28px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.title {
+  margin: 0 0 20px 0;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  text-shadow: 0 2px 18px rgba(122, 162, 255, 0.15);
+}
+
+.setup {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+.field span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.field input {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--text);
+  background: var(--panel);
+  outline: none;
+}
+.field input:focus {
+  box-shadow: var(--ring);
+  border-color: rgba(122, 162, 255, 0.5);
+}
+
+.btn {
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--panel);
+  color: var(--text);
+  transition: transform 0.06s ease, box-shadow 0.15s ease, background 0.2s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn.primary {
+  background: linear-gradient(180deg, var(--accent), #5f7fe6);
+  color: #0d1428;
+}
+
+.board-wrap {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+.board {
+  --cell: min(22vw, 120px);
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 12px;
+  justify-content: center;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: clamp(36px, 10vw, 48px);
+  letter-spacing: 1px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  background: radial-gradient(
+      400px 260px at 50% -60%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 60%
+    ),
+    var(--panel);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.06s ease, box-shadow 0.15s ease, background 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.cell:hover {
+  transform: translateY(-2px);
+}
+.cell:focus {
+  outline: none;
+  box-shadow: var(--ring);
+}
+.cell.filled {
+  border-color: rgba(122, 162, 255, 0.35);
+}
+.cell.win {
+  background: linear-gradient(
+      180deg,
+      rgba(53, 224, 185, 0.25),
+      rgba(53, 224, 185, 0.12)
+    ),
+    var(--panel);
+  border-color: rgba(53, 224, 185, 0.65);
+  box-shadow: 0 12px 28px rgba(53, 224, 185, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.status {
+  margin: 14px 6px 0;
+  min-height: 24px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+.cell.shake {
+  animation: shake 300ms ease-in-out;
+}

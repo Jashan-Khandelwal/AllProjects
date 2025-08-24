@@ -1,0 +1,43 @@
+/* basic layout helpers */
+body { font-family: system-ui, sans-serif; padding: 2rem; }
+
+/* the host element – keep inline-flow */
+.dropdown { position: relative; display: inline-block; }
+
+/* menu is hidden by default */
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  min-width: 8rem;
+
+  position: absolute;
+  top: 100%;           /* just below the toggle button */
+  left: 0;
+
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+
+  opacity: 0;          /* allow fade transition */
+  transform: translateY(-0.5rem);
+  pointer-events: none; /* prevent accidental hover while hidden */
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+/* toggled class from JS */
+.dropdown-menu.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* menu items */
+.dropdown-menu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #333;
+}
+.dropdown-menu li a:hover { background:#f3f3f3; }

@@ -1,0 +1,28 @@
+/* style.css */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  font-family: sans-serif;
+}
+
+#resize-btn {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+#grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 960px;
+  height: 960px;
+  border: 2px solid #333;
+}
+
+.grid-cell {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  /* width & height will be set dynamically in JS (960/n) */
+}

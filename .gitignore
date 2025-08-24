@@ -1,0 +1,14 @@
+# ignore node stuff in any subfolder
+**/node_modules/
+**/.env
+**/.env.local
+**/dist/
+**/build/
+**/.next/
+**/.turbo/
+**/coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store

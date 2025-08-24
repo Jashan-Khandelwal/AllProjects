@@ -1,0 +1,240 @@
+/* ====== Base / tokens ====== */
+:root {
+  --bg: #0b0c10;
+  --card: #111319;
+  --text: #e8eefc;
+  --muted: #9fb0d0;
+  --ok: #2ecc71;
+  --warn: #ff6b6b;
+  --focus: #7aa2ff;
+  --border: #272a35;
+  --input: #0f1220;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font: 16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 10% -10%, #1a1d2b 0, #0b0c10 60%);
+  padding: 24px;
+}
+
+/* ====== Layout ====== */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 1.8rem;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.3px;
+}
+
+.form-card {
+  background: color-mix(in oklab, var(--card) 88%, #fff 0%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin: 12px 0 0;
+}
+
+legend {
+  padding: 0 8px;
+  font-weight: 600;
+}
+
+/* ====== Fields ====== */
+.field {
+  margin-block: 14px;
+}
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--input);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field input::placeholder {
+  color: color-mix(in oklab, var(--muted) 70%, #fff 0%);
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--focus) 25%, transparent 75%);
+}
+
+/* Valid/invalid styling via pseudo-classes (native constraints) */
+.field input:valid,
+.field select:valid {
+  border-color: color-mix(in oklab, var(--ok) 70%, #fff 0%);
+}
+.field input:invalid:focus,
+.field select:invalid:focus {
+  border-color: var(--warn);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--warn) 25%, transparent 75%);
+}
+
+/* Class-based states (JS toggles .valid/.invalid on .field) */
+.field.valid input,
+.field.valid select {
+  border-color: color-mix(in oklab, var(--ok) 70%, #fff 0%);
+}
+.field.invalid input,
+.field.invalid select {
+  border-color: var(--warn);
+  animation: shake 0.25s linear 1;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Help & error text */
+.help {
+  margin: 6px 2px 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.error {
+  margin: 6px 2px 0;
+  min-height: 1.2em; /* reserve space */
+  color: var(--warn);
+  font-size: 0.95rem;
+}
+
+/* Password rules checklist */
+.pw-rules {
+  list-style: none;
+  margin: 8px 0 2px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.pw-rules li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.pw-rules li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 1.2;
+  opacity: 0.6;
+}
+.pw-rules li.ok {
+  color: color-mix(in oklab, var(--ok) 80%, #fff 0%);
+}
+.pw-rules li.ok::before {
+  content: "✓";
+  opacity: 1;
+}
+
+/* Inline input with trailing button (show/hide password) */
+.input-with-action {
+  position: relative;
+  display: grid;
+}
+.input-with-action .ghost-btn {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  height: calc(100% - 12px);
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.input-with-action .ghost-btn:hover {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+}
+
+/* Actions */
+.actions {
+  margin-top: 18px;
+}
+.actions button[type="submit"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--focus) 45%, #fff 0%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--focus) 25%, #000 75%),
+    #0a0e1c
+  );
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.actions button[type="submit"]:hover {
+  filter: brightness(1.05);
+}
+
+/* Success banner */
+.flash {
+  background: color-mix(in oklab, var(--ok) 16%, #000 84%);
+  border: 1px solid color-mix(in oklab, var(--ok) 40%, #fff 0%);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+/* Small screens */
+@media (max-width: 560px) {
+  body {
+    padding: 16px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

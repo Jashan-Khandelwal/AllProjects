@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tic Tac Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="wrapper">
+      <h1 class="title">Tic Tac Toe</h1>
+
+      <form id="setup" class="setup" onsubmit="return false" novalidate>
+        <label class="field">
+          <span>Player X</span>
+          <input id="nameX" type="text" placeholder="Player X" maxlength="16" />
+        </label>
+
+        <label class="field">
+          <span>Player O</span>
+          <input id="nameO" type="text" placeholder="Player O" maxlength="16" />
+        </label>
+
+        <button id="start" type="button" class="btn primary">
+          Start / Restart
+        </button>
+      </form>
+
+      <section class="board-wrap">
+        <div
+          id="board"
+          class="board"
+          role="grid"
+          aria-label="Tic Tac Toe Board"
+        >
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 1"
+            data-index="0"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 2"
+            data-index="1"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 3"
+            data-index="2"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 4"
+            data-index="3"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 5"
+            data-index="4"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 6"
+            data-index="5"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 7"
+            data-index="6"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 8"
+            data-index="7"
+          ></button>
+          <button
+            class="cell"
+            role="gridcell"
+            aria-label="Cell 9"
+            data-index="8"
+          ></button>
+        </div>
+      </section>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

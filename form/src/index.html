@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inline Validation Form</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Sign up</h1>
+
+      <!-- Success banner (shown by JS on successful "submit") -->
+      <div id="success" class="flash" role="status" aria-live="polite" hidden>
+        🖐️ High five! You're all set.
+      </div>
+
+      <form id="signup" novalidate>
+        <fieldset class="form-card">
+          <legend>Tell us about you</legend>
+
+          <!-- Email -->
+          <div class="field" data-field="email">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              required
+              aria-describedby="emailHelp emailError"
+              placeholder="you@example.com"
+            />
+            <p id="emailHelp" class="help">We’ll never share your email.</p>
+            <p
+              id="emailError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!-- Country -->
+          <div class="field" data-field="country">
+            <label for="country">Country</label>
+            <select
+              id="country"
+              name="country"
+              required
+              aria-describedby="countryError"
+            >
+              <!-- data-postal-* help JS update the Postal Code field dynamically -->
+              <option value="" disabled selected>Select your country</option>
+              <option
+                value="IN"
+                data-postal-pattern="^\d{6}$"
+                data-postal-title="Enter a 6-digit PIN code (e.g., 560001)"
+                data-postal-placeholder="560001"
+              >
+                India
+              </option>
+              <option
+                value="US"
+                data-postal-pattern="^\d{5}(-\d{4})?$"
+                data-postal-title="5 digits or ZIP+4 (e.g., 94043 or 94043-1351)"
+                data-postal-placeholder="94043"
+              >
+                United States
+              </option>
+              <option
+                value="CA"
+                data-postal-pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$"
+                data-postal-title="Format A1A 1A1, space optional (e.g., K1A 0B1)"
+                data-postal-placeholder="K1A 0B1"
+              >
+                Canada
+              </option>
+              <option
+                value="GB"
+                data-postal-pattern="^([Gg][Ii][Rr] 0[Aa]{2}|(?!.*[QVX])[A-Za-z]{1,2}\d[A-Za-z\d]?\s?\d[A-Za-z]{2})$"
+                data-postal-title="UK postcode (e.g., SW1A 1AA)"
+                data-postal-placeholder="SW1A 1AA"
+              >
+                United Kingdom
+              </option>
+              <option
+                value="AU"
+                data-postal-pattern="^\d{4}$"
+                data-postal-title="4-digit postcode (e.g., 3000)"
+                data-postal-placeholder="3000"
+              >
+                Australia
+              </option>
+            </select>
+            <p
+              id="countryError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!-- Postal Code -->
+          <div class="field" data-field="postal">
+            <label for="postal">Postal Code</label>
+            <input
+              id="postal"
+              name="postal"
+              type="text"
+              inputmode="text"
+              required
+              aria-describedby="postalHelp postalError"
+              title="Select a country first"
+              placeholder="Select a country first"
+            />
+            <p id="postalHelp" class="help">
+              Pattern updates based on selected country.
+            </p>
+            <p
+              id="postalError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!-- Password -->
+          <div class="field" data-field="password">
+            <label for="password">Password</label>
+            <div class="input-with-action">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                required
+                minlength="8"
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+                aria-describedby="passwordHelp passwordError"
+                placeholder="Create a strong password"
+              />
+              <!-- Optional: visibility toggle (wired up by JS) -->
+              <button
+                type="button"
+                class="ghost-btn"
+                id="togglePw"
+                aria-label="Show or hide password"
+              >
+                👁
+              </button>
+            </div>
+
+            <!-- live checklist (JS toggles .ok on each <li>) -->
+            <ul id="pwRules" class="pw-rules" aria-live="polite">
+              <li data-rule="len">At least 8 characters</li>
+              <li data-rule="lower">Contains a lowercase letter</li>
+              <li data-rule="upper">Contains an uppercase letter</li>
+              <li data-rule="digit">Contains a number</li>
+              <li data-rule="special">Contains a symbol</li>
+            </ul>
+            <p id="passwordHelp" class="help">
+              Tip: use a phrase you can remember.
+            </p>
+            <p
+              id="passwordError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="field" data-field="confirm">
+            <label for="confirm">Confirm Password</label>
+            <input
+              id="confirm"
+              name="confirm"
+              type="password"
+              autocomplete="new-password"
+              required
+              aria-describedby="confirmError"
+              placeholder="Re-enter your password"
+            />
+            <p
+              id="confirmError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+
+          <!-- Submit -->
+          <div class="actions">
+            <button id="submitBtn" type="submit">Create account</button>
+          </div>
+        </fieldset>
+      </form>
+    </main>
+  </body>
+</html>

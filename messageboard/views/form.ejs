@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Message Form</title>
+  </head>
+  <body>
+    <h1>Post a Message</h1>
+
+    <form action="/new" method="POST">
+      <!-- Author name input -->
+      <div>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required />
+      </div>
+
+      <!-- Message input -->
+      <div>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required />
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

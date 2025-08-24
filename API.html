@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giphy search</title>
+  </head>
+  <body>
+    <input id="q" placeholder="search gifs (e.g. cats)" />
+    <button type="button" id="button">search</button>
+    <p id="msg"></p>
+    <img id="gif" alt="GIF result" />
+
+    <script>
+      const button = document.getElementById("button");
+      const input = document.getElementById("q");
+      const img = document.getElementById("gif");
+      const msg = document.getElementById("msg");
+
+      // default transparent 1x1 gif
+      const DEFAULT_GIF =
+        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+      img.src = DEFAULT_GIF;
+
+      button.addEventListener("click", () => {
+        const term = input.value.trim();
+        if (!term) {
+          msg.textContent = "Type a keyword.";
+          img.src = DEFAULT_GIF;
+          return;
+        }
+
+        // use /search so we can detect empty data arrays (limit=1 = first match)
+        const url =
+          "https://api.giphy.com/v1/gifs/search" +
+          "?api_key=9mz1qOsxbIMfE7BCZKW0iMnCkmCO22ip" +
+          "&limit=1" +
+          "&q=" +
+          encodeURIComponent(term);
+
+        msg.textContent = "Loading…";
+
+        fetch(url)
+          .then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            // Giphy returns 200 even when no results -> data.data is []
+            if (Array.isArray(data.data) && data.data.length > 0) {
+              img.src = data.data[0].images.original.url;
+              msg.textContent = "";
+            } else {
+              img.src = DEFAULT_GIF;
+              msg.textContent = 'No GIFs found for "' + term + '".';
+            }
+          })
+          .catch(function (err) {
+            // network/URL/CORS/etc. errors end up here
+            console.error(err);
+            img.src = DEFAULT_GIF;
+            msg.textContent = "Failed to load GIF: " + err.message;
+          });
+      });
+    </script>
+  </body>
+</html>
