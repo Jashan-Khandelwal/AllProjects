@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <form action="dbsearch" method="GET" style="margin: 1rem 0">
+      <label>
+        Name:
+        <input
+          type="text"
+          name="name"
+          value="<%= (query && query.name) || '' %>"
+        />
+      </label>
+      <button type="submit">Search</button>
+    </form>
+
+    <% if (typeof results !== 'undefined') { %>
+    <p><strong><%= results.length %></strong> result(s)</p>
+
+    <% if (results.length) { %>
+    <ul>
+      <% results.forEach(u => { %>
+      <li>ID: <%= u.id %> — <%= u.username %></li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No matches found.</p>
+    <% } %> <% } %>
+    <a href="/">DB home</a>
+  </body>
+</html>
