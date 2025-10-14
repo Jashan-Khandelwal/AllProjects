@@ -1,20 +1,16 @@
-const express = require('express')
-const router = express.Router()
-
-// middleware that is specific to this router
-const timeLog = (req, res, next) => {
-  console.log('Time: ', Date.now())
-  next()
+function loadScript(src, callback) {
+  let script = document.createElement('script');
+  script.src = src;
+  script.onload = () => callback(script);
+  document.head.append(script);
 }
-router.use(timeLog)
 
-// define the home page route
-router.get('/', (req, res) => {
-  res.send('Birds home page')
-})
-// define the about route
-router.get('/about', (req, res) => {
-  res.send('About birds')
-})
+loadScript('/my/script.js', function(script) {
 
-module.exports = router
+  alert(`Cool, the ${script.src} is loaded, let's load one more`);
+
+  loadScript('/my/script2.js', function(script) {
+    alert(`Cool, the second script is loaded`);
+  });
+
+});
