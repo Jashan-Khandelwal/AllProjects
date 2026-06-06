@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  //name //type of field //optional modifier  //attributes(start with @)
+  // id Int @id @default(autoincrement())
+  id String @id @default(uuid())
+  age Int
+  name String
+  email String  @unique
+  role Role @default(BASIC)
+  // largeNumber BigInt
+  // preferences Json
+  // blob Bytes
+  // blob Unsupported("")
+  writtenPosts Post[] @relation("WrittenPosts")
+  favouritePosts Post[] @relation("FavouritePosts")
+  // userPreferences Userpreference?
+
+  userPreference UserPreference? @relation(fields: [userPreferenceId],references: [id])
+  userPreferenceId String? @unique
+
+  @@unique([age,name])
+  @@index([email])
+}
+
+model UserPreference{
+  id String @id @default(uuid())
+  emailUpdates Boolean
+  user User?
+}
+
+model Post{
+  id String @id @default(uuid())
+  title String
+  averageRating Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  author User @relation("WrittenPosts", fields: [authorId],references: [id])
+  authorId String
+  favouritedBy User? @relation("FavouritePosts",fields: [favouritedById],references: [id])
+  favouritedById String?
+  categories Category[]
+
+  //you can use this instead of if at the top. title and author combo should be unique
+  // @@id([title,authorId])
+}
+
+model Category{
+  id String @id @default(uuid())
+  name String @unique
+  posts Post[]
+}
+
+enum Role{
+  BASIC
+  ADMIN
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 2rem;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 1rem;
+      }
+      .card {
+        background: #fff;
+        padding: 1rem 1.25rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1.5rem;
+      }
+      .form-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: flex-end;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+        color: #333;
+      }
+      input {
+        padding: 0.55rem 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 220px;
+        background: #fff;
+      }
+      button {
+        padding: 0.55rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #007bff;
+        color: #fff;
+        font-weight: 600;
+      }
+      button:hover {
+        background: #005ec7;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+      }
+      th {
+        background: #0d6efd;
+        color: #fff;
+        font-weight: 700;
+      }
+      tr:nth-child(even) td {
+        background: #f7f9fc;
+      }
+      .muted {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <!-- Search form -->
+    <div class="card">
+      <form action="/search" method="GET">
+        <div class="form-row">
+          <div>
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="<%= (query && query.name) || '' %>"
+              placeholder="e.g., Alice or Smith"
+            />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="<%= (query && query.email) || '' %>"
+              placeholder="e.g., alice@example.com"
+            />
+          </div>
+          <div>
+            <button type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results -->
+    <% if (typeof results !== 'undefined') { %>
+    <p class="muted"><strong><%= results.length %></strong> result(s)</p>
+
+    <% if (results.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Bio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach(u => { %>
+        <tr>
+          <td><%= u.firstname %></td>
+          <td><%= u.lastname %></td>
+          <td><%= u.email || '—' %></td>
+          <td><%= (u.age != null ? u.age : '—') %></td>
+          <td><%= u.bio || '—' %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p class="muted">No matches found.</p>
+    <% } %> <% } %>
+  </body>
+</html>
