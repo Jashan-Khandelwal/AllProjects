@@ -96,7 +96,7 @@ function validateForm() {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const validation = validate();
+  const validation = validateForm();
   if (validation) {
     validation.reportValidity();
     validation.focus();
@@ -127,7 +127,7 @@ document.querySelector("#shelf").addEventListener("click", (e) => {
   if (e.target.classList.contains("remove")) {
     // splice out and re-render
     myLibrary.splice(myLibrary.indexOf(book), 1);
-    renderLibrary();
+    renderLib();
   }
 
   if (e.target.classList.contains("toggle")) {
