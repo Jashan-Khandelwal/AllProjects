@@ -1,145 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Holy Grail Mockup</title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <div class="logo">Header Logo</div>
-        <div class="menu">
-          <ul>
-            <li>header link one</li>
-            <li>header link two</li>
-            <li>header link three</li>
-            <li>header link four</li>
-          </ul>
-        </div>
-      </div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jashan Khandelwal — Project Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#DCE0E3;
+    --ink:#15171C;
+    --ink-soft:#4A4F58;
+    --card:#FAFAF7;
+    --hair:#C2C7CC;
+    --hair-soft:#D2D6DA;
+    --live:#2E7D5B;
+    --live-bg:#E3F0E9;
+    --server:#9A6A3C;
+    --server-bg:#F0E7DB;
+    --shadow:rgba(21,23,28,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    padding:clamp(20px,5vw,64px);
+    min-height:100vh;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
 
-      <div class="sidebar">
-        <div class="photo">
-          <p>placeholder for image</p>
-        </div>
-        <div class="side-content">Box 1</div>
-        <div class="side-content">Box 2</div>
-        <div class="side-content">Box 3</div>
-      </div>
+  /* Header */
+  header{
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:28px;margin-bottom:44px;
+  }
+  .path{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;color:var(--ink-soft);
+    letter-spacing:.02em;margin-bottom:22px;
+    word-break:break-all;
+  }
+  .path b{color:var(--ink);font-weight:600}
+  h1{
+    font-size:clamp(34px,7vw,64px);
+    font-weight:700;line-height:1.02;
+    letter-spacing:-.02em;margin-bottom:18px;
+  }
+  .lede{
+    max-width:52ch;font-size:clamp(15px,2.2vw,17px);
+    color:var(--ink-soft);
+  }
+  .count{
+    display:inline-block;
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:600;color:var(--ink);
+  }
 
-      <div class="nav">
-        <ul>
-          <li>Latest Articles</li>
-          <li>Most Views</li>
-          <li>Featured</li>
-        </ul>
-      </div>
+  /* Section */
+  .section{margin-bottom:52px}
+  .section-head{
+    display:flex;align-items:baseline;gap:14px;
+    margin-bottom:20px;
+  }
+  .section-head h2{
+    font-size:14px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.14em;
+  }
+  .section-head .n{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;color:var(--ink-soft);
+  }
+  .section-head .rule{
+    flex:1;height:1px;background:var(--hair);
+  }
+  .section-note{
+    font-size:13.5px;color:var(--ink-soft);
+    margin:-8px 0 22px;max-width:56ch;
+  }
 
-      <div class="article">
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-        <div class="card">
-          <p class="title">Article Title</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud...
-          </p>
-        </div>
-      </div>
+  /* Grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(248px,1fr));
+    gap:14px;
+  }
+  .card{
+    display:block;position:relative;
+    background:var(--card);
+    border:1px solid var(--hair-soft);
+    border-radius:3px;
+    padding:18px 18px 16px;
+    text-decoration:none;color:inherit;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  a.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 22px var(--shadow);
+    border-color:var(--ink);
+  }
+  a.card:focus-visible{
+    outline:2.5px solid var(--live);
+    outline-offset:2px;
+  }
+  .card .folder{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .card .folder::before{content:"/ ";opacity:.5}
+  .card .title{
+    font-size:18px;font-weight:600;
+    letter-spacing:-.01em;margin-bottom:6px;
+  }
+  .card .desc{
+    font-size:13px;color:var(--ink-soft);line-height:1.45;
+  }
+  .card .chip{
+    position:absolute;top:16px;right:16px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 7px;border-radius:2px;
+  }
+  .chip.live{color:var(--live);background:var(--live-bg)}
+  .chip.server{color:var(--server);background:var(--server-bg)}
+  .card.is-server{opacity:.92}
 
-      <div class="footer">
-        <p>Copyright © The Odin Project 2021</p>
-      </div>
-    </div>
-  </body>
+  footer{
+    margin-top:24px;padding-top:24px;
+    border-top:1px solid var(--hair);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;color:var(--ink-soft);
+  }
+  footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hair)}
+  footer a:hover{border-color:var(--ink)}
+
+  /* Load-in */
+  @media (prefers-reduced-motion:no-preference){
+    .card{opacity:0;animation:rise .5s ease forwards}
+    @keyframes rise{to{opacity:1;transform:translateY(0)}}
+    .card{transform:translateY(8px)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="path">jashan-khandelwal.github.io <b>/ AllProjects</b></div>
+    <h1>Project Index</h1>
+    <p class="lede">A running collection of builds — mostly front-end exercises and small apps, served together from one repo. <span class="count" id="liveCount"></span> are live in the browser; the rest need a server and link to their source.</p>
+  </header>
+  <main id="sections"></main>
+  <footer>
+    Built &amp; deployed via GitHub Pages · <a href="https://github.com/Jashan-Khandelwal/AllProjects" target="_blank" rel="noopener">source on GitHub</a>
+  </footer>
+</div>
+
+<script>
+/* ────────────────────────────────────────────────────────────
+   EDIT HERE. One line per project.
+   status: "live"   → static, opens at ./folder/  (must have an index.html)
+           "server" → backend; links to the GitHub folder instead
+   folder: the exact folder name in the repo
+   title/desc: what a visitor reads
+   ──────────────────────────────────────────────────────────── */
+const REPO = "https://github.com/Jashan-Khandelwal/AllProjects/tree/main/";
+
+const projects = [
+  { folder:"calculator",           title:"Calculator",        desc:"Chained-operation calculator with a keypad UI.", status:"live" },
+  { folder:"Etch-a-Sketch",        title:"Etch A Sketch",     desc:"Hover-to-draw grid sketchpad.", status:"live" },
+  { folder:"carousel/src",         title:"Image Carousel",    desc:"Auto-advancing slideshow with manual controls.", status:"live" },
+  { folder:"dropdown",             title:"Dropdown Menu",     desc:"Reusable dropdown component.", status:"live" },
+  { folder:"Liberary",             title:"Library",           desc:"Add, track, and remove books from a shelf.", status:"live" },
+  { folder:"odin-recipies",        title:"Recipes",           desc:"Multi-page recipe site.", status:"live" },
+  { folder:"restaurantPage",       title:"Restaurant Page",   desc:"Tabbed restaurant site (webpack build).", status:"live" },
+  { folder:"basicInformationalSite", title:"Landing Page",    desc:"A styled informational landing page.", status:"live" },
+  { folder:"form",                 title:"Sign-up Form",      desc:"Validated sign-up form layout.", status:"live" },
+  { folder:"avataar",              title:"Avatar",            desc:"Avatar / profile UI experiment.", status:"live" },
+  { folder:"react",                title:"React App",         desc:"React build output.", status:"live" },
+
+  { folder:"formuserpsql",         title:"Users + Postgres",  desc:"Express app storing users in Postgres.", status:"server" },
+  { folder:"inventory",            title:"Inventory App",     desc:"CRUD inventory with a database backend.", status:"server" },
+  { folder:"messageboard",         title:"Message Board",     desc:"Post and read messages, server-rendered.", status:"server" },
+  { folder:"fileUploader",         title:"File Uploader",     desc:"Upload and manage files via a backend.", status:"server" },
+  { folder:"express-session-authentication-starter", title:"Session Auth", desc:"Express session-based login starter.", status:"server" },
+  { folder:"backend-tut",          title:"Backend Sandbox",   desc:"Express / Node backend experiments.", status:"server" },
+  { folder:"expre",                title:"Express Basics",    desc:"Minimal Express routing setup.", status:"server" },
+];
+
+const sections = [
+  { key:"live",   label:"Live in the browser", note:null },
+  { key:"server", label:"Needs a server",      note:"GitHub Pages only serves static files, so these link to their source instead of running. Host them on Render, Railway, or Fly.io to make them live." },
+];
+
+const root = document.getElementById("sections");
+let liveTotal = 0;
+
+sections.forEach(sec=>{
+  const items = projects.filter(p=>p.status===sec.key);
+  if(!items.length) return;
+  if(sec.key==="live") liveTotal = items.length;
+
+  const wrap = document.createElement("section");
+  wrap.className = "section";
+
+  const head = document.createElement("div");
+  head.className = "section-head";
+  head.innerHTML = `<h2>${sec.label}</h2><span class="n">${String(items.length).padStart(2,"0")}</span><span class="rule"></span>`;
+  wrap.appendChild(head);
+
+  if(sec.note){
+    const note = document.createElement("p");
+    note.className = "section-note";
+    note.textContent = sec.note;
+    wrap.appendChild(note);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+
+  items.forEach((p,i)=>{
+    const isLive = p.status==="live";
+    const href = isLive ? `./${p.folder}/` : REPO + p.folder;
+    const a = document.createElement("a");
+    a.className = "card" + (isLive?"":" is-server");
+    a.href = href;
+    if(!isLive){ a.target="_blank"; a.rel="noopener"; }
+    a.style.animationDelay = (i*0.035)+"s";
+    a.innerHTML = `
+      <span class="chip ${isLive?"live":"server"}">${isLive?"Live":"Source"}</span>
+      <div class="folder">${p.folder}</div>
+      <div class="title">${p.title}</div>
+      <div class="desc">${p.desc}</div>`;
+    grid.appendChild(a);
+  });
+
+  wrap.appendChild(grid);
+  root.appendChild(wrap);
+});
+
+document.getElementById("liveCount").textContent = liveTotal + " projects";
+</script>
+</body>
 </html>

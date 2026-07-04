@@ -1,0 +1,202 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f4f5f7;
+  color: #222;
+}
+
+#app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar (project list + new-project form) */
+#sidebar {
+  order: -1; /* sits visually first even though #content comes first in the HTML */
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #2d2d3a;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#sidebar button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#sidebar button:hover {
+  background-color: #44475a;
+}
+
+#new-project-form {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #44475a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#new-project-form input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #1f1f2b;
+  color: #fff;
+}
+
+#new-project-form button {
+  background-color: #5c6bc0;
+}
+
+#new-project-form button:hover {
+  background-color: #7986cb;
+}
+
+/* Main content (Add Todo button + todo cards) */
+#content {
+  flex: 1;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  align-content: start;
+}
+
+#content > button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #5c6bc0;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#content > button:hover {
+  background-color: #7986cb;
+}
+
+.todo-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-left: 4px solid #9e9e9e;
+}
+
+.todo-card.priority-high {
+  border-left-color: #e53935;
+}
+
+.todo-card.priority-medium {
+  border-left-color: #fb8c00;
+}
+
+.todo-card.priority-low {
+  border-left-color: #43a047;
+}
+
+.todo-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.todo-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.todo-card button {
+  align-self: flex-start;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.todo-card button:first-of-type {
+  background-color: #eceff1;
+  color: #222;
+}
+
+.todo-card button:last-of-type {
+  background-color: #e53935;
+  color: #fff;
+}
+
+/* Add/edit todo modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-form input,
+.todo-form textarea,
+.todo-form select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.todo-form textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.todo-form button {
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #5c6bc0;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.todo-form button:hover {
+  background-color: #7986cb;
+}
