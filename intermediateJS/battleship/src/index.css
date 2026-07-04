@@ -1,0 +1,37 @@
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 2px;
+}
+
+.cell {
+  border: 1px solid #888;
+  background-color: #cce6ff;
+}
+
+.cell--ship {
+  background-color: #336699;
+}
+
+.cell--hit {
+  background-color: #cc3333;
+}
+
+.cell--miss {
+  background-color: #ffffff;
+}
+
+.cell--drag-over {
+  outline: 3px solid orange;
+}
+
+.fleet-ship {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 4px;
+  background-color: #336699;
+  color: white;
+  cursor: grab;
+  border-radius: 4px;
+}
