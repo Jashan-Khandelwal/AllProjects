@@ -12,3 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .DS_Store
+
+# nested repos — tracked separately, not as submodules
+adobeMain/
+express-session-authentication-starter/
+javaScript/javascript-exercises/
