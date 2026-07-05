@@ -1,58 +1,65 @@
-import { useState } from "react";
-
-export default function GeneralForm() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
+export default function GeneralForm({ data, isSubmitted, onChange, onSubmit, onEdit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    onSubmit();
   };
 
+  if (isSubmitted) {
+    return (
+      <section className="card">
+        <h2>General Information</h2>
+        <div className="entry-display">
+          <p><strong>Name:</strong> {data.name}</p>
+          <p><strong>Email:</strong> {data.email}</p>
+          <p><strong>Phone:</strong> {data.phone}</p>
+        </div>
+        <button type="button" onClick={onEdit}>Edit</button>
+      </section>
+    );
+  }
+
   return (
-    <div>
+    <section className="card">
+      <h2>General Information</h2>
       <form onSubmit={handleSubmit}>
-        <h2>Contact Info</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full border p-2 rounded-md"
-          required
-        />
+        <div className="field">
+          <label htmlFor="name">Full Name</label>
+          <input
+            id="name"
+            type="text"
+            value={data.name}
+            onChange={(e) => onChange("name", e.target.value)}
+            placeholder="Jane Doe"
+            required
+          />
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full border p-2 rounded-md"
-          required
-        />
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={data.email}
+            onChange={(e) => onChange("email", e.target.value)}
+            placeholder="jane@example.com"
+            required
+          />
+        </div>
 
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone Number"
-          value={form.phone}
-          onChange={handleChange}
-          className="w-full border p-2 rounded-md"
-          required
-        />
+        <div className="field">
+          <label htmlFor="phone">Phone</label>
+          <input
+            id="phone"
+            type="tel"
+            value={data.phone}
+            onChange={(e) => onChange("phone", e.target.value)}
+            placeholder="+1 555 000 0000"
+            required
+          />
+        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
-    </div>
+    </section>
   );
 }

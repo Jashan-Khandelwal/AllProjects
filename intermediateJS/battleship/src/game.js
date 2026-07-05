@@ -14,10 +14,11 @@ function placeFleetRandomly(player) {
   fleetLengths.forEach((length) => {
     const ship = createShip(length);
     let placed = false;
-    while (!plmmmaced) {
+    while (!placed) {
       placed = player.gameboard.placeShip(ship, getRandomStartCoordinates(length));
     }
   });
+
 }
 
 const game = {

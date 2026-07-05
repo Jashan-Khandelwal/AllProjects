@@ -1,4 +1,4 @@
-export default function EducationalForm({
+export default function ExperienceForm({
   entries,
   isSubmitted,
   onChange,
@@ -15,12 +15,13 @@ export default function EducationalForm({
   if (isSubmitted) {
     return (
       <section className="card">
-        <h2>Education</h2>
+        <h2>Work Experience</h2>
         {entries.map((entry, idx) => (
           <div key={idx} className="entry-display">
-            <p><strong>School:</strong> {entry.school}</p>
-            <p><strong>Degree:</strong> {entry.degree}</p>
-            <p><strong>Period:</strong> {entry.start} – {entry.end}</p>
+            <p><strong>Company:</strong> {entry.company}</p>
+            <p><strong>Position:</strong> {entry.position}</p>
+            <p><strong>Responsibilities:</strong> {entry.responsibilities}</p>
+            <p><strong>Period:</strong> {entry.from} – {entry.to}</p>
           </div>
         ))}
         <button type="button" onClick={onEdit}>Edit</button>
@@ -30,7 +31,7 @@ export default function EducationalForm({
 
   return (
     <section className="card">
-      <h2>Education</h2>
+      <h2>Work Experience</h2>
       <form onSubmit={handleSubmit}>
         {entries.map((entry, idx) => (
           <div key={idx} className="entry-form">
@@ -46,45 +47,56 @@ export default function EducationalForm({
             </div>
 
             <div className="field">
-              <label>School Name</label>
+              <label>Company Name</label>
               <input
                 type="text"
-                value={entry.school}
-                onChange={(e) => onChange(idx, "school", e.target.value)}
-                placeholder="University of Example"
+                value={entry.company}
+                onChange={(e) => onChange(idx, "company", e.target.value)}
+                placeholder="Acme Corp"
                 required
               />
             </div>
 
             <div className="field">
-              <label>Title of Study</label>
+              <label>Position Title</label>
               <input
                 type="text"
-                value={entry.degree}
-                onChange={(e) => onChange(idx, "degree", e.target.value)}
-                placeholder="B.Sc. Computer Science"
+                value={entry.position}
+                onChange={(e) => onChange(idx, "position", e.target.value)}
+                placeholder="Software Engineer"
+                required
+              />
+            </div>
+
+            <div className="field">
+              <label>Main Responsibilities</label>
+              <textarea
+                value={entry.responsibilities}
+                onChange={(e) => onChange(idx, "responsibilities", e.target.value)}
+                placeholder="Describe your key responsibilities..."
+                rows={3}
                 required
               />
             </div>
 
             <div className="field-row">
               <div className="field">
-                <label>Start</label>
+                <label>From</label>
                 <input
                   type="text"
-                  value={entry.start}
-                  onChange={(e) => onChange(idx, "start", e.target.value)}
-                  placeholder="2021"
+                  value={entry.from}
+                  onChange={(e) => onChange(idx, "from", e.target.value)}
+                  placeholder="Jan 2022"
                   required
                 />
               </div>
               <div className="field">
-                <label>End</label>
+                <label>To</label>
                 <input
                   type="text"
-                  value={entry.end}
-                  onChange={(e) => onChange(idx, "end", e.target.value)}
-                  placeholder="2025 or Present"
+                  value={entry.to}
+                  onChange={(e) => onChange(idx, "to", e.target.value)}
+                  placeholder="Dec 2023 or Present"
                   required
                 />
               </div>

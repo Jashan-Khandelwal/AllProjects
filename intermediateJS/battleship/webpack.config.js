@@ -1,15 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 module.exports = {
-  mode: "development",
+  mode: isProduction ? "production" : "development",
   entry: "./src/index.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  devtool: "eval-source-map",
+  devtool: isProduction ? "source-map" : "eval-source-map",
   devServer: {
     watchFiles: ["./src/index.html"],
   },

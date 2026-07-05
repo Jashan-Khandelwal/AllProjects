@@ -1,6 +1,1 @@
-import EducationalForms from "./EducationalForm";
-import GeneralForm from "./GeneralForm";
-
-export default function(){
-    
-}
+/* Unused — all rendering is handled by GeneralForm, EducationalForm, ExperienceForm */
