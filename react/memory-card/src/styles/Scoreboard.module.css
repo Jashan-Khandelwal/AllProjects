@@ -1,0 +1,17 @@
+.board {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(15, 52, 96, 0.6);
+  border-radius: 12px;
+}
+
+.item {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.value {
+  font-weight: 700;
+  color: #e94560;
+}

@@ -11,6 +11,7 @@ const Profile = () => {
       <p>So, how are you?</p>
       <hr />
       <h2>The profile visited is here:</h2>
+      {/* <Outlet /> */}
       {name === "popeye" ? (
         <Popeye />
       ) : name === "spinach" ? (

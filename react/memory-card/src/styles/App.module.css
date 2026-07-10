@@ -1,0 +1,28 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.25rem;
+}
+
+.subtitle {
+  color: #aab;
+  font-size: 1rem;
+}
+
+.status {
+  margin-top: 3rem;
+  font-size: 1.25rem;
+}
