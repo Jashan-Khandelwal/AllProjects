@@ -90,6 +90,20 @@
   <body>
     <h1><%= title %></h1>
 
+    <form action="/" method="GET" style="margin-bottom: 1.5rem">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search by name..."
+        value="<%= locals.search || '' %>"
+        style="padding: 0.4rem 0.6rem; border: 1px solid #ccc; border-radius: 4px"
+      />
+      <button type="submit" class="btn btn-update">Search</button>
+      <% if (locals.search) { %>
+      <a href="/" class="btn btn-update" style="text-decoration: none">Clear</a>
+      <% } %>
+    </form>
+
     <% if (locals.users && users.length) { %>
     <table>
       <thead>
@@ -137,5 +151,12 @@
     <% } %>
 
     <a href="/create" class="create-link">+ Create a user</a>
+    <a
+      href="/delete"
+      class="create-link"
+      style="background: #dc3545"
+      onclick="return confirm('Delete ALL users? This cannot be undone.');"
+      >Delete all users</a
+    >
   </body>
 </html>

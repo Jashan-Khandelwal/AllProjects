@@ -39,8 +39,19 @@ const validateUser = [
 
 exports.usersListGet = async (req, res, next) => {
   try {
-    const users = await db.getUsers();
-    res.render("index", { title: "User list", users });
+    const search = req.query.search || "";
+    const users = await db.getUsers(search);
+    res.render("index", { title: "User list", users, search });
+  } catch (e) {
+    next(e);
+  }
+};
+
+// GET /delete — remove every user from the database.
+exports.usersDeleteAllGet = async (req, res, next) => {
+  try {
+    await db.deleteAllUsers();
+    res.redirect("/");
   } catch (e) {
     next(e);
   }

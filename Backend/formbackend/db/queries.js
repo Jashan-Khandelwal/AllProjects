@@ -1,6 +1,16 @@
 const pool = require("./pool");
 
-async function getUsers() {
+async function getUsers(search) {
+  // When a search term is given, filter in SQL (case-insensitive, partial).
+  if (search && search.trim()) {
+    const { rows } = await pool.query(
+      `SELECT id,firstname,lastname,email,age,bio FROM usernames
+       WHERE firstname ILIKE $1 OR lastname ILIKE $1
+       ORDER BY id`,
+      [`%${search.trim()}%`]
+    );
+    return rows;
+  }
   const { rows } = await pool.query(
     "SELECT id,firstname,lastname,email,age,bio FROM usernames ORDER BY id"
   );
@@ -40,6 +50,10 @@ async function searchUsernames(term) {
 
 async function deleteUser(id) {
   await pool.query("DELETE FROM usernames WHERE id = $1", [id]);
+}
+
+async function deleteAllUsers() {
+  await pool.query("DELETE FROM usernames");
 }
 
 async function updateUser(id, { firstname, lastname, email, age, bio }) {
@@ -83,6 +97,7 @@ module.exports = {
   insertUser,
   searchUsernames,
   deleteUser,
+  deleteAllUsers,
   updateUser,
   getUser,
   searchUsers,
