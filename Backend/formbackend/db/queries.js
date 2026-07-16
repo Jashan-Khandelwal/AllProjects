@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 async function getUsers() {
   const { rows } = await pool.query(
-    "SELECT id,firstname,lastname,email,age,bio FROM users ORDER BY id"
+    "SELECT id,firstname,lastname,email,age,bio FROM usernames ORDER BY id"
   );
   return rows;
 }
@@ -15,15 +15,15 @@ async function insertUser({
   bio = "none",
 }) {
   await pool.query(
-    `INSERT INTO users (firstname, lastname, email, age, bio) 
+    `INSERT INTO usernames (firstname, lastname, email, age, bio) 
      VALUES ($1, $2, $3, $4, $5)`,
-    [firstname, lastname, email, (age = 0), bio]
+    [firstname, lastname, email, age, bio]
   );
 }
 
 async function getUser(id) {
   const { rows } = await pool.query(
-    "SELECT id, firstname, lastname, email, age, bio FROM users WHERE id = $1",
+    "SELECT id, firstname, lastname, email, age, bio FROM usernames WHERE id = $1",
     [id]
   );
   return rows[0] || null; // return one user or null
@@ -32,19 +32,19 @@ async function getUser(id) {
 async function searchUsernames(term) {
   const like = `%${term}%`; // ✅ put % in parameter
   const { rows } = await pool.query(
-    "SELECT id, firstname FROM users WHERE LOWER(firstname) LIKE $1 ORDER BY username",
+    "SELECT id, firstname FROM usernames WHERE LOWER(firstname) LIKE $1 ORDER BY firstname",
     [like]
   );
   return rows;
 }
 
 async function deleteUser(id) {
-  await pool.query("DELETE FROM users WHERE id = $1", [id]);
+  await pool.query("DELETE FROM usernames WHERE id = $1", [id]);
 }
 
 async function updateUser(id, { firstname, lastname, email, age, bio }) {
   await pool.query(
-    `UPDATE users 
+    `UPDATE usernames 
      SET firstname = $1, lastname = $2, email = $3, age = $4, bio = $5 
      WHERE id = $6`,
     [firstname, lastname, email, age, bio, id]
@@ -73,7 +73,7 @@ async function searchUsers({ name = "", email = "" }) {
 
   const where = conds.length ? "WHERE " + conds.join(" AND ") : "";
   const { rows } = await pool.query(
-    `SELECT id, firstname, lastname, email, age, bio FROM users ${where} ORDER BY id`,
+    `SELECT id, firstname, lastname, email, age, bio FROM usernames ${where} ORDER BY id`,
     params
   );
   return rows;
