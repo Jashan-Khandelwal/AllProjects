@@ -2,16 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log In · Members Only</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Loign</h1>
-    <form action="/login" method="POST">
-      <label for="username">Username</label>
-      <input id="username" name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button type="submit">Login</button>
-    </form>
+    <main class="sheet">
+      <header class="masthead">
+        <p class="title">Members Only</p>
+        <p class="tagline">Talk is cheap. Membership isn't.</p>
+      </header>
+
+      <h1>Log in</h1>
+      <form action="/login" method="POST">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required />
+
+        <button type="submit">Log in</button>
+      </form>
+
+      <hr />
+      <p class="muted">
+        Not a member yet? <a href="/sign-up">Create an account</a>.
+      </p>
+    </main>
   </body>
 </html>

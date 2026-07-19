@@ -1,0 +1,21 @@
+<%- include('partials/head') %>
+
+<h1 class="page-title">Browse by Type</h1>
+<p class="subtitle">Choose a type to see every Pokémon in it.</p>
+
+<% if (types.length === 0) { %>
+  <p class="empty">No types yet. (We'll add some in a moment.)</p>
+<% } else { %>
+  <ul class="card-grid">
+    <% types.forEach((type) => { %>
+      <li class="type-card" style="--type-color: <%= type.color %>">
+        <a href="/types/<%= type.id %>">
+          <span class="type-name"><%= type.name %></span>
+          <span class="type-count"><%= type.pokemon_count %> Pokémon</span>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

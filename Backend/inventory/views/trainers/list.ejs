@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+
+<div class="page-head">
+  <h1 class="page-title">Trainers</h1>
+  <a class="btn" href="/trainers/new">＋ New Trainer</a>
+</div>
+
+<% if (trainers.length === 0) { %>
+  <p class="empty">No trainers yet.</p>
+<% } else { %>
+  <ul class="trainer-list">
+    <% trainers.forEach((tr) => { %>
+      <li>
+        <a href="/trainers/<%= tr.id %>">
+          <span class="trainer-name"><%= tr.name %></span>
+          <% if (tr.hometown) { %><span class="trainer-town"><%= tr.hometown %></span><% } %>
+          <span class="trainer-count"><%= tr.pokemon_count %> Pokémon</span>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('../partials/footer') %>

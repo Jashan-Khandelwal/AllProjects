@@ -1,0 +1,253 @@
+/* Members Only — a small private club on the internet.
+   Warm paper, oxblood ink, plenty of quiet. */
+
+:root {
+  --paper: #f3efe4;
+  --paper-2: #ece6d7;
+  --ink: #26221b;
+  --muted: #736a58;
+  --oxblood: #7a2e26;
+  --oxblood-dark: #5f231d;
+  --rule: #d6cdb8;
+  --shadow: rgba(38, 34, 27, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 3.5rem 1.25rem 5rem;
+  background-color: var(--paper);
+  /* faint hairline grid, like ledger paper */
+  background-image: linear-gradient(var(--paper-2) 1px, transparent 1px);
+  background-size: 100% 1.9rem;
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* the framed card that every page sits inside */
+.sheet {
+  max-width: 40rem;
+  margin: 0 auto;
+  background: #fbf8f0;
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 0 var(--rule), 6px 8px 0 -2px var(--shadow);
+  padding: 2.5rem 2.75rem 3rem;
+}
+
+/* masthead */
+.masthead {
+  text-align: center;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.masthead .title {
+  font-size: 1.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 600;
+}
+
+.masthead .tagline {
+  margin: 0.35rem 0 0;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+h1 {
+  font-size: 1.55rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.75rem;
+}
+
+h3 {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.25rem 0 1rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 1.75rem 0;
+}
+
+/* links */
+a {
+  color: var(--oxblood);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  color: var(--oxblood-dark);
+}
+
+/* a link that should read as a standalone action */
+.linkrow {
+  display: block;
+  margin: 0.4rem 0;
+}
+
+/* membership badge */
+.badge {
+  display: inline-block;
+  border: 1px solid var(--oxblood);
+  color: var(--oxblood);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  vertical-align: 0.1em;
+}
+
+/* forms */
+form {
+  margin: 0;
+}
+
+label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1rem 0 0.3rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fffdf7;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.55rem 0.65rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--oxblood);
+  box-shadow: inset 0 0 0 1px var(--oxblood);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* buttons */
+button {
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fbf8f0;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  padding: 0.6rem 1.4rem;
+  margin-top: 1.4rem;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+}
+
+/* the small delete button inside a message */
+.msg-delete {
+  margin: 0;
+  display: inline;
+}
+.msg-delete button {
+  margin: 0;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.62rem;
+  color: var(--oxblood);
+  background: transparent;
+  border-color: var(--rule);
+}
+.msg-delete button:hover {
+  color: #fbf8f0;
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+}
+
+/* message board */
+.board {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.board li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.board li:last-child {
+  border-bottom: 0;
+}
+
+.board .who {
+  font-weight: 600;
+}
+.board .when {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+.board .body {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* an anonymous (locked) message shown to non-members */
+.board .locked {
+  color: #4a443a;
+}
+.board .locked::before {
+  content: "\201C";
+}
+.board .locked::after {
+  content: "\201D";
+}
+
+.empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.muted {
+  color: var(--muted);
+}

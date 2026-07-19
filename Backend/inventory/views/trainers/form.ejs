@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+
+<a class="back-link" href="/trainers">← All trainers</a>
+<h1 class="page-title"><%= title %></h1>
+
+<%- include('../partials/errors') %>
+
+<form method="POST" action="<%= formAction %>" class="form">
+  <label>Name
+    <input type="text" name="name" value="<%= trainer.name || '' %>" required maxlength="100" />
+  </label>
+  <label>Hometown
+    <input type="text" name="hometown" value="<%= trainer.hometown || '' %>" maxlength="100" />
+  </label>
+  <label>Bio
+    <textarea name="bio" rows="3" maxlength="500"><%= trainer.bio || '' %></textarea>
+  </label>
+  <button type="submit" class="btn">Save</button>
+</form>
+
+<%- include('../partials/footer') %>

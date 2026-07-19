@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+
+<a class="back-link" href="/types">← All types</a>
+<h1 class="page-title"><%= title %></h1>
+
+<%- include('../partials/errors') %>
+
+<form method="POST" action="<%= formAction %>" class="form">
+  <label>
+    Name
+    <input
+      type="text"
+      name="name"
+      value="<%= type.name %>"
+      required
+      maxlength="50"
+    />
+  </label>
+
+  <label>
+    Description
+    <textarea name="description" rows="3" maxlength="500">
+<%= type.description || '' %></textarea
+    >
+  </label>
+
+  <label>
+    Colour
+    <input type="color" name="color" value="<%= type.color || '#777777' %>" />
+  </label>
+
+  <button type="submit" class="btn">Save</button>
+</form>
+
+<%- include('../partials/footer') %>

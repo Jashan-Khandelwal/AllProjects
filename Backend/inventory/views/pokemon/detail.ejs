@@ -1,0 +1,46 @@
+<%- include('../partials/head') %>
+
+<a class="back-link" href="/pokemon">← All Pokémon</a>
+
+<article class="detail">
+  <div class="detail-image">
+    <% if (pokemon.image_url) { %><img src="<%= pokemon.image_url %>" alt="<%= pokemon.name %>" /><% } %>
+  </div>
+  <div class="detail-body">
+    <div class="page-head">
+      <h1 class="page-title">
+        <%= pokemon.name %>
+        <% if (pokemon.dex_number) { %><span class="dex">#<%= pokemon.dex_number %></span><% } %>
+      </h1>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/pokemon/<%= pokemon.id %>/edit">Edit</a>
+        <form method="POST" action="/pokemon/<%= pokemon.id %>/delete" onsubmit="return confirm('Delete this Pokémon?');">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+
+    <p class="badges">
+      <% types.forEach((t) => { %>
+        <span class="badge" style="background: <%= t.color %>"><%= t.name %></span>
+      <% }) %>
+    </p>
+
+    <% if (pokemon.description) { %><p><%= pokemon.description %></p><% } %>
+
+    <dl class="stats">
+      <dt>Level</dt><dd><%= pokemon.level %></dd>
+      <dt>Quantity</dt><dd><%= pokemon.quantity %></dd>
+      <dt>Trainer</dt>
+      <dd>
+        <% if (pokemon.trainer_id) { %>
+          <a href="/trainers/<%= pokemon.trainer_id %>"><%= pokemon.trainer_name %></a>
+        <% } else { %>
+          <em>Wild (no trainer)</em>
+        <% } %>
+      </dd>
+    </dl>
+  </div>
+</article>
+
+<%- include('../partials/footer') %>

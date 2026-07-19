@@ -10,6 +10,7 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(express.static(path.join(__dirname, "public")));
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.initialize()); // ✅ add this
 app.use(passport.session());
@@ -56,22 +57,16 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-app.listen(3000, (error) => {
-  if (error) {
-    throw error;
-  }
-  console.log("app listening on port 3000!");
-});
 
 app.get("/", async (req, res, next) => {
   try {
     const { rows: messages } = await pool.query(
       `SELECT m.id,m.content, m.created_at, u.username
-       FROM messages m
-       JOIN users u ON u.id = m.user_id
-       ORDER BY m.created_at DESC`
+      FROM messages m
+      JOIN users u ON u.id = m.user_id
+      ORDER BY m.created_at DESC`
     );
-
+    
     // Pass both user (may be undefined) and messages
     res.render("index", { user: req.user, messages });
   } catch (error) {
@@ -92,19 +87,19 @@ app.post("/sign-up", async (req, res, next) => {
       confirmpassword,
       membership_status,
     } = req.body;
-
+    
     if (password !== confirmpassword) {
       return res.status(400).send("Passwords do not match!");
     }
-
+    
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    
     await pool.query(
       `INSERT INTO users (first_name, last_name, username, password, membership_status)
-       VALUES ($1, $2, $3, $4, $5)`,
+      VALUES ($1, $2, $3, $4, $5)`,
       [first_name, last_name, username, hashedPassword, membership_status]
     );
-
+    
     res.redirect("/");
   } catch (error) {
     console.error(error);
@@ -141,13 +136,13 @@ app.post("/jointheclub", async (req, res, next) => {
     }
     if (req.body.password.toLowerCase() === "goldfish") {
       const newStatus = "premium";
-
+      
       await pool.query("update users SET membership_status=$1 where id = $2", [
         newStatus,
         req.user.id,
       ]);
       req.user.membership_status = newStatus;
-
+      
       return res.redirect("/");
     } else {
       return res.status(403).send("incorrect password");
@@ -163,15 +158,15 @@ app.post("/post-message", async (req, res, next) => {
     if (!req.user || req.user.membership_status !== "premium") {
       return res.status(403).send("Only premium members can post messages!");
     }
-
+    
     const message = (req.body.message || "").trim();
     if (!message) return res.status(400).send("Message cannot be empty.");
-
+    
     await pool.query(
       "INSERT INTO messages (user_id, content) VALUES ($1, $2)",
       [req.user.id, message]
     );
-
+    
     res.redirect("/");
   } catch (error) {
     console.error(error);
@@ -184,14 +179,21 @@ app.post("/delete-message/:id", async (req, res, next) => {
     if (!req.user || req.user.membership_status !== "admin") {
       return res.status(403).send("only admin can delete");
     }
-
+    
     const msgId = req.params.id;
     if (!msgId) return res.status(400).send("no such message exists");
-
+    
     await pool.query("DELETE FROM messages WHERE id=$1", [msgId]);
     res.redirect("/");
   } catch (err) {
     console.error(err);
     next(err);
   }
+});
+
+app.listen(3000, (error) => {
+  if (error) {
+    throw error;
+  }
+  console.log("app listening on port 3000!");
 });

@@ -1,0 +1,19 @@
+<%- include('../partials/head') %>
+
+<div class="page-head">
+  <h1 class="page-title">All Types</h1>
+  <a class="btn" href="/types/new">＋ New Type</a>
+</div>
+
+<ul class="card-grid">
+  <% types.forEach((type) => { %>
+    <li class="type-card" style="--type-color: <%= type.color %>">
+      <a href="/types/<%= type.id %>">
+        <span class="type-name"><%= type.name %></span>
+        <span class="type-count"><%= type.pokemon_count %> Pokémon</span>
+      </a>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('../partials/footer') %>

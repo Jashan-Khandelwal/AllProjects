@@ -2,37 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up · Members Only</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Sign Up</h1>
-    <form action="/sign-up" method="POST">
-      <label for="first_name">First Name</label>
-      <input id="first_name" name="first_name" type="text" required />
+    <main class="sheet">
+      <header class="masthead">
+        <p class="title">Members Only</p>
+        <p class="tagline">Talk is cheap. Membership isn't.</p>
+      </header>
 
-      <label for="last_name">Last Name</label>
-      <input id="last_name" name="last_name" type="text" required />
+      <h1>Put your name down</h1>
+      <p class="muted">
+        Signing up gets you in the door. Posting rights come later.
+      </p>
 
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" required />
+      <form action="/sign-up" method="POST">
+        <label for="first_name">First name</label>
+        <input id="first_name" name="first_name" type="text" required />
 
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required />
+        <label for="last_name">Last name</label>
+        <input id="last_name" name="last_name" type="text" required />
 
-      <label for="confirmpassword">Confirm-Password</label>
-      <input
-        id="confirmpassword"
-        name="confirmpassword"
-        type="password"
-        required
-      />
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required />
 
-      <label for="membership_status">Membership Status</label>
-      <select id="membership_status" name="membership_status" required>
-        <option value="basic">Basic</option>
-      </select>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required />
 
-      <button type="submit">Sign Up</button>
-    </form>
+        <label for="confirmpassword">Confirm password</label>
+        <input
+          id="confirmpassword"
+          name="confirmpassword"
+          type="password"
+          required
+        />
+
+        <label for="membership_status">Membership status</label>
+        <select id="membership_status" name="membership_status" required>
+          <option value="basic">Basic</option>
+        </select>
+
+        <button type="submit">Sign up</button>
+      </form>
+
+      <hr />
+      <p class="muted">Already a member? <a href="/login">Log in</a>.</p>
+    </main>
   </body>
 </html>

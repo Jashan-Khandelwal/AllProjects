@@ -2,68 +2,81 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Members Only</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <% const isLoggedIn = !!locals.user; %> <% const isPremium = isLoggedIn &&
-    (locals.user.membership_status === "premium" ||
-    locals.user.membership_status === "admin"); %> <% const isAdmin = isLoggedIn
-    && locals.user.membership_status === "admin"; %> <% if (isLoggedIn) { %>
-    <h1>WELCOME BACK <%= locals.user.username %>!</h1>
-    <p>
-      Membership status: <strong><%= locals.user.membership_status %></strong>
-    </p>
-    <a href="/logout">LOG OUT</a>
-    <hr />
+    <%
+      const isLoggedIn = !!locals.user;
+      const isPremium = isLoggedIn &&
+        (locals.user.membership_status === "premium" ||
+         locals.user.membership_status === "admin");
+      const isAdmin = isLoggedIn && locals.user.membership_status === "admin";
+    %>
+    <main class="sheet">
+      <header class="masthead">
+        <p class="title">Members Only</p>
+        <p class="tagline">Talk is cheap. Membership isn't.</p>
+      </header>
 
-    <% if (isPremium) { %>
-    <h2>Post a message</h2>
-    <form action="/post-message" method="POST">
-      <label for="message">Your Message:</label><br />
-      <textarea
-        id="message"
-        name="message"
-        rows="4"
-        cols="50"
-        required
-      ></textarea
-      ><br />
-      <button type="submit">Post Message</button>
-    </form>
-    <% } else { %>
-    <p>Want to post messages? Join the club:</p>
-    <a href="/jointheclub">Join the Club</a>
-    <% } %> <% } else { %>
-    <h1>Welcome to Members Only</h1>
-    <p>Please log in or sign up to continue:</p>
-    <a href="/login">Go to Login Page</a><br />
-    <a href="/sign-up">Go to Signup Page</a>
-    <% } %>
+      <% if (isLoggedIn) { %>
+        <h1>Welcome back, <%= locals.user.username %>.</h1>
+        <p class="muted">
+          Membership:
+          <span class="badge"><%= locals.user.membership_status %></span>
+          &nbsp;·&nbsp; <a href="/logout">Log out</a>
+        </p>
 
-    <hr />
-    <h3>All Messages</h3>
-    <% if (locals.messages && locals.messages.length > 0) { %>
-    <ul>
-      <% locals.messages.forEach(msg => { %> <% if (isPremium) { %>
-      <li>
-        <strong><%= msg.username %></strong>
-        <em>(<%= new Date(msg.created_at).toLocaleString('en-IN') %>)</em>: <%=
-        msg.content %> <% if (isAdmin) { %>
-        <form
-          action="/delete-message/<%= msg.id %>"
-          method="POST"
-          style="display: inline"
-        >
-          <button type="submit">Delete</button>
-        </form>
+        <% if (isPremium) { %>
+          <h2>Leave a message</h2>
+          <form action="/post-message" method="POST">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">Post to the board</button>
+          </form>
+        <% } else { %>
+          <hr />
+          <p>
+            Members may sign their posts and see who wrote what.
+            <a href="/jointheclub">Join the club</a> to earn the privilege.
+          </p>
         <% } %>
-      </li>
       <% } else { %>
-      <li><%= msg.content %></li>
-      <% } %> <% }) %>
-    </ul>
-    <% } else { %>
-    <p>No messages yet.</p>
-    <% } %>
+        <h1>An invitation, of sorts.</h1>
+        <p>
+          Anyone can read the board below — but only members know who is
+          talking. Log in, or put your name down.
+        </p>
+        <a class="linkrow" href="/login">Log in</a>
+        <a class="linkrow" href="/sign-up">Create an account</a>
+      <% } %>
+
+      <h3>The Message Board</h3>
+      <% if (locals.messages && locals.messages.length > 0) { %>
+        <ul class="board">
+          <% locals.messages.forEach(msg => { %>
+            <li>
+              <% if (isPremium) { %>
+                <span class="who"><%= msg.username %></span>
+                <span class="when">·
+                  <%= new Date(msg.created_at).toLocaleString('en-IN') %></span>
+                <% if (isAdmin) { %>
+                  <form class="msg-delete"
+                        action="/delete-message/<%= msg.id %>" method="POST">
+                    <button type="submit">Delete</button>
+                  </form>
+                <% } %>
+                <span class="body"><%= msg.content %></span>
+              <% } else { %>
+                <span class="locked"><%= msg.content %></span>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p class="empty">Nobody has said anything yet. Quiet, isn't it.</p>
+      <% } %>
+    </main>
   </body>
 </html>

@@ -2,17 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Enter Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Join the Club · Members Only</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Enter Your Password</h1>
+    <main class="sheet">
+      <header class="masthead">
+        <p class="title">Members Only</p>
+        <p class="tagline">Talk is cheap. Membership isn't.</p>
+      </header>
 
-    <form action="/jointheclub" method="POST">
-      <p>Which fish costs the most?</p>
-      <label for="password">Password:</label>
-      <input id="password" name="password" type="password" required />
+      <h1>The secret handshake</h1>
+      <p>
+        There's no fee — just a question every member is expected to know.
+        Answer it and you're one of us.
+      </p>
 
-      <button type="submit">Submit</button>
-    </form>
+      <form action="/jointheclub" method="POST">
+        <label for="password">Which fish costs the most?</label>
+        <input id="password" name="password" type="password" required />
+
+        <button type="submit">Say the word</button>
+      </form>
+
+      <hr />
+      <p class="muted"><a href="/">Back to the board</a></p>
+    </main>
   </body>
 </html>
