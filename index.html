@@ -166,6 +166,7 @@
    status: "live"   → static, opens at ./folder/  (must have an index.html)
            "server" → backend; links to the GitHub folder instead
    folder: the exact folder name in the repo
+   repo:   (optional) full link for a project that moved to its own repo
    title/desc: what a visitor reads
    ──────────────────────────────────────────────────────────── */
 const REPO = "https://github.com/Jashan-Khandelwal/AllProjects/tree/main/";
@@ -186,7 +187,7 @@ const projects = [
   { folder:"formuserpsql",         title:"Users + Postgres",  desc:"Express app storing users in Postgres.", status:"server" },
   { folder:"inventory",            title:"Inventory App",     desc:"CRUD inventory with a database backend.", status:"server" },
   { folder:"messageboard",         title:"Message Board",     desc:"Post and read messages, server-rendered.", status:"server" },
-  { folder:"fileUploader",         title:"File Uploader",     desc:"Upload and manage files via a backend.", status:"server" },
+  { folder:"file-uploader",        title:"File Uploader",     desc:"Upload and manage files via a backend.", status:"server", repo:"https://github.com/Jashan-Khandelwal/file-uploader" },
   { folder:"express-session-authentication-starter", title:"Session Auth", desc:"Express session-based login starter.", status:"server" },
   { folder:"backend-tut",          title:"Backend Sandbox",   desc:"Express / Node backend experiments.", status:"server" },
   { folder:"expre",                title:"Express Basics",    desc:"Minimal Express routing setup.", status:"server" },
@@ -225,7 +226,7 @@ sections.forEach(sec=>{
 
   items.forEach((p,i)=>{
     const isLive = p.status==="live";
-    const href = isLive ? `./${p.folder}/` : REPO + p.folder;
+    const href = p.repo || (isLive ? `./${p.folder}/` : REPO + p.folder);
     const a = document.createElement("a");
     a.className = "card" + (isLive?"":" is-server");
     a.href = href;
